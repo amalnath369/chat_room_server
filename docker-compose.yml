@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  chat-server:
+    build: .
+    container_name: websocket-chat-server
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=false
+      - MESSAGE_TTL=30
+    volumes:
+      - ./src:/app/src
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  chat-client-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-client-1
+    environment:
+      - SERVER_URL=ws://chat-server:8000/ws
+    depends_on:
+      - chat-server
+
+  chat-client-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-client-2
+    environment:
+      - SERVER_URL=ws://chat-server:8000/ws
+    depends_on:
+      - chat-server
