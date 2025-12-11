@@ -24,6 +24,13 @@ A lightweight real-time chat server using FastAPI WebSockets with topic-based ch
 
 1. Clone and run with Docker Compose:
 ```bash
+This project includes a full Docker setup.  
+Run the server easily inside a container.
+
+## 1️⃣ Clone the repository
+```bash
+git clone https://github.com/amalnath369/chat_room_server.git
+
 # Build and start
 docker-compose up --build
 
@@ -35,3 +42,5 @@ docker-compose logs -f
 
 # Stop
 docker-compose down
+
+Then open: http://localhost:8000/client
